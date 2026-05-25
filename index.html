@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Morebuildtech | Premium Interior & Construction</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --black: #080808;
+  --deep: #0d0d0d;
+  --panel: #111111;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --gold3: #f0d98a;
+  --white: #f8f4ee;
+  --grey: #888;
+  --lgrey: #555;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(201,168,76,0.2);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Montserrat',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* CUSTOM CURSOR */
+.cursor{
+  width:10px;height:10px;
+  background:var(--gold);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;
+  z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s;
+  mix-blend-mode:difference;
+}
+.cursor-ring{
+  width:36px;height:36px;
+  border:1px solid rgba(201,168,76,0.5);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;
+  z-index:99998;
+  transform:translate(-50%,-50%);
+  transition:all 0.15s ease;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* PARTICLES CANVAS */
+#particles{
+  position:fixed;inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:0.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 70px;
+  transition:all 0.4s;
+}
+nav.scrolled{
+  background:rgba(8,8,8,0.92);
+  backdrop-filter:blur(20px);
+  padding:18px 70px;
+  border-bottom:1px solid var(--glass-border);
+}
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;
+  font-weight:600;
+  letter-spacing:4px;
+  color:var(--white);
+  text-transform:uppercase;
+}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;gap:40px;list-style:none;align-items:center;}
+.nav-links a{
+  font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(248,244,238,0.6);text-decoration:none;
+  transition:color 0.3s;position:relative;
+}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{
+  border:1px solid var(--gold) !important;
+  color:var(--gold) !important;
+  padding:10px 28px;
+  transition:all 0.3s !important;
+}
+.nav-cta:hover{background:var(--gold) !important;color:var(--black) !important;}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 70px;
+  position:relative;overflow:hidden;
+}
+
+.hero-grid-overlay{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridShift 20s linear infinite;
+}
+@keyframes gridShift{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(60px,60px);}
+}
+
+.hero-glow{
+  position:absolute;top:-200px;right:-100px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(201,168,76,0.12) 0%,transparent 65%);
+  animation:glowPulse 5s ease-in-out infinite;
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-200px;left:-100px;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%);
+  animation:glowPulse 7s ease-in-out infinite reverse;
+  pointer-events:none;
+}
+@keyframes glowPulse{
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.1);opacity:0.7;}
+}
+
+.hero-content{position:relative;z-index:2;}
+
+.hero-eyebrow{
+  font-size:0.65rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:28px;margin-top:80px;
+  display:flex;align-items:center;gap:16px;
+  opacity:0;animation:fadeSlide 1s 0.3s forwards;
+}
+.hero-eyebrow::before{
+  content:'';width:40px;height:1px;background:var(--gold);
+}
+
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(4rem,9vw,10.5rem);
+  font-weight:300;
+  line-height:0.88;
+  color:var(--white);
+  margin-bottom:40px;
+  opacity:0;animation:fadeSlide 1s 0.5s forwards;
+}
+.hero-title .stroke{
+  -webkit-text-stroke:1px var(--gold);
+  color:transparent;
+}
+.hero-title .gold{color:var(--gold);}
+
+.hero-desc{
+  max-width:440px;
+  font-size:0.95rem;line-height:1.9;
+  color:rgba(248,244,238,0.5);
+  margin-bottom:50px;
+  opacity:0;animation:fadeSlide 1s 0.7s forwards;
+}
+
+.hero-actions{
+  display:flex;gap:20px;align-items:center;
+  opacity:0;animation:fadeSlide 1s 0.9s forwards;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--black);
+  padding:16px 44px;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;
+  text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+  font-weight:500;
+}
+.btn-gold::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  transition:left 0.5s;
+}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(201,168,76,0.3);}
+.btn-gold:hover::before{left:100%;}
+
+.btn-ghost{
+  border:1px solid rgba(248,244,238,0.2);
+  color:rgba(248,244,238,0.7);
+  padding:16px 44px;
+  font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;
+  text-decoration:none;
+  transition:all 0.3s;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+.hero-stats{
+  position:absolute;right:70px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:40px;
+  opacity:0;animation:fadeSlide 1s 1.1s forwards;
+  z-index:2;
+}
+.hstat{text-align:right;}
+.hstat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.5rem;font-weight:600;
+  color:var(--gold);line-height:1;
+}
+.hstat-label{
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--lgrey);margin-top:4px;
+}
+.hstat-line{
+  width:40px;height:1px;background:var(--glass-border);
+  margin-left:auto;margin-top:16px;
+}
+
+.hero-scroll{
+  position:absolute;bottom:40px;left:70px;
+  display:flex;align-items:center;gap:16px;
+  font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--lgrey);
+  opacity:0;animation:fadeSlide 1s 1.3s forwards;
+  z-index:2;
+}
+.scroll-line{
+  width:60px;height:1px;background:var(--lgrey);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:100%;background:var(--gold);
+  animation:scanLine 2s ease-in-out infinite;
+}
+@keyframes scanLine{
+  0%{left:-100%;}100%{left:100%;}
+}
+
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* SECTION BASE */
+section{padding:110px 70px;position:relative;z-index:1;}
+.s-tag{
+  font-size:0.6rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+  display:flex;align-items:center;gap:14px;
+}
+.s-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
+.s-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,5rem);
+  font-weight:300;color:var(--white);
+  line-height:1;margin-bottom:16px;
+}
+.s-sub{
+  font-size:0.92rem;line-height:1.9;
+  color:rgba(248,244,238,0.45);max-width:480px;
+}
+
+/* ABOUT */
+#about{background:var(--deep);}
+.about-wrap{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:90px;align-items:center;margin-top:70px;
+}
+.about-left{position:relative;}
+.about-img-main{
+  width:100%;height:500px;
+  background:linear-gradient(135deg,var(--panel),var(--deep));
+  position:relative;overflow:hidden;
+}
+.about-img-main::before{
+  content:'MOREBUILDTECH';
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;font-weight:700;
+  color:rgba(201,168,76,0.06);
+  letter-spacing:-2px;
+  white-space:nowrap;
+  text-align:center;padding:20px;
+}
+.about-border-accent{
+  position:absolute;top:-16px;left:-16px;
+  width:60%;height:60%;
+  border-top:1px solid var(--gold);
+  border-left:1px solid var(--gold);
+  pointer-events:none;
+}
+.about-border-accent2{
+  position:absolute;bottom:-16px;right:-16px;
+  width:60%;height:60%;
+  border-bottom:1px solid var(--gold);
+  border-right:1px solid var(--gold);
+  pointer-events:none;
+}
+.about-badge2{
+  position:absolute;bottom:30px;right:-30px;
+  background:var(--gold);
+  padding:24px 30px;
+  text-align:center;
+}
+.badge-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:700;
+  color:var(--black);line-height:1;
+}
+.badge-txt{
+  font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(8,8,8,0.7);margin-top:4px;
+}
+
+.about-right p{
+  font-size:0.98rem;line-height:2;
+  color:rgba(248,244,238,0.55);
+  margin-bottom:22px;
+}
+.about-pillars{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;margin-top:40px;
+}
+.pillar{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  padding:28px 24px;
+  backdrop-filter:blur(10px);
+  transition:background 0.3s,border-color 0.3s;
+  position:relative;overflow:hidden;
+}
+.pillar::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.pillar:hover{border-color:rgba(201,168,76,0.5);}
+.pillar:hover::before{opacity:1;}
+.pillar-icon{font-size:1.8rem;margin-bottom:10px;}
+.pillar-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.18rem;font-weight:600;
+  color:var(--white);letter-spacing:1px;
+}
+.pillar-desc{
+  font-size:0.85rem;color:var(--lgrey);
+  line-height:1.6;margin-top:6px;
+}
+
+/* SERVICES */
+#services{background:var(--black);}
+.services-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:60px;
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(201,168,76,0.1);
+}
+.svc{
+  background:var(--black);
+  padding:48px 36px;
+  position:relative;overflow:hidden;
+  transition:background 0.4s;
+  group:true;
+}
+.svc::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s;
+}
+.svc:hover{background:var(--panel);}
+.svc:hover::after{transform:scaleX(1);}
+.svc-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;font-weight:700;
+  color:rgba(201,168,76,0.08);
+  line-height:1;margin-bottom:16px;
+  transition:color 0.3s;
+}
+.svc:hover .svc-num{color:rgba(201,168,76,0.2);}
+.svc-icon{font-size:2rem;margin-bottom:14px;}
+.svc-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:600;
+  color:var(--white);letter-spacing:1px;
+  margin-bottom:12px;
+}
+.svc-desc{
+  font-size:0.8rem;line-height:1.8;
+  color:rgba(248,244,238,0.4);
+}
+.svc-arrow{
+  margin-top:28px;
+  font-size:0.65rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);
+  opacity:0;transform:translateX(-10px);
+  transition:all 0.3s;
+  display:flex;align-items:center;gap:10px;
+}
+.svc-arrow::after{content:'→';}
+.svc:hover .svc-arrow{opacity:1;transform:translateX(0);}
+
+/* GALLERY */
+#gallery{background:var(--deep);padding-bottom:0;}
+.gallery-intro{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;margin-bottom:60px;
+}
+.gallery-mosaic{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:280px 280px;
+  gap:4px;
+}
+.gitem{
+  position:relative;overflow:hidden;
+  background:var(--panel);
+  cursor:pointer;
+}
+.gitem:nth-child(1){grid-column:span 5;grid-row:span 2;}
+.gitem:nth-child(2){grid-column:span 4;}
+.gitem:nth-child(3){grid-column:span 3;}
+.gitem:nth-child(4){grid-column:span 3;}
+.gitem:nth-child(5){grid-column:span 4;}
+
+.gitem-bg{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.9rem;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.06);
+  background:linear-gradient(135deg,var(--panel),var(--deep));
+  transition:transform 0.6s ease;
+}
+.gitem:hover .gitem-bg{transform:scale(1.06);}
+
+.gitem-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,8,8,0.85) 0%,rgba(8,8,8,0.2) 50%,transparent 100%);
+  opacity:0;transition:opacity 0.4s;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:28px;
+}
+.gitem:hover .gitem-overlay{opacity:1;}
+.gitem-cat{
+  font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+.gitem-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:600;color:var(--white);
+}
+
+/* PROCESS */
+#process{background:var(--black);}
+.process-line{
+  display:flex;gap:0;margin-top:70px;
+  position:relative;
+}
+.process-line::before{
+  content:'';
+  position:absolute;top:28px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--glass-border),var(--gold),var(--glass-border),transparent);
+  z-index:0;
+}
+.pstep{
+  flex:1;padding:0 24px;
+  text-align:center;position:relative;z-index:1;
+}
+.pstep-dot{
+  width:56px;height:56px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:600;color:var(--gold);
+  background:var(--black);
+  margin:0 auto 28px;
+  transition:all 0.3s;
+}
+.pstep:hover .pstep-dot{
+  background:var(--gold);color:var(--black);
+  box-shadow:0 0 30px rgba(201,168,76,0.4);
+}
+.pstep-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:600;color:var(--white);
+  margin-bottom:10px;
+}
+.pstep-desc{
+  font-size:0.75rem;line-height:1.7;
+  color:rgba(248,244,238,0.4);
+}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--deep);}
+.tgrid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;margin-top:60px;
+}
+.tcard{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  padding:40px 36px;
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.tcard::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.tcard:hover{border-color:rgba(201,168,76,0.4);transform:translateY(-6px);}
+.tcard:hover::before{opacity:1;}
+.tcard-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:4rem;color:var(--gold);
+  line-height:0.5;opacity:0.4;
+  margin-bottom:24px;
+}
+.tcard-text{
+  font-size:0.83rem;line-height:1.9;
+  color:rgba(248,244,238,0.6);
+  font-style:italic;margin-bottom:32px;
+}
+.stars{color:var(--gold);font-size:0.75rem;letter-spacing:3px;margin-bottom:20px;}
+.tcard-author{display:flex;align-items:center;gap:16px;}
+.author-av{
+  width:48px;height:48px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:700;color:var(--black);
+  flex-shrink:0;
+}
+.author-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:600;color:var(--white);
+}
+.author-r{font-size:0.7rem;color:var(--lgrey);letter-spacing:1px;margin-top:2px;}
+
+/* CONTACT */
+#contact{background:var(--black);overflow:hidden;}
+.contact-bg-text{
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;
+  font-size:20rem;font-weight:700;
+  color:rgba(201,168,76,0.03);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  white-space:nowrap;pointer-events:none;
+  letter-spacing:-10px;
+}
+.contact-wrap{
+  display:grid;grid-template-columns:5fr 7fr;
+  gap:80px;margin-top:70px;position:relative;z-index:1;
+}
+.cinfo p{
+  font-size:0.83rem;line-height:2;
+  color:rgba(248,244,238,0.45);
+  margin-bottom:44px;
+}
+.cdetails{display:flex;flex-direction:column;gap:28px;}
+.citem{display:flex;gap:18px;align-items:flex-start;}
+.cicon{
+  width:46px;height:46px;flex-shrink:0;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  backdrop-filter:blur(10px);
+}
+.clabel{
+  font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:5px;
+}
+.cval{font-size:0.88rem;color:var(--white);}
+
+.cform{display:flex;flex-direction:column;gap:18px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.fg{display:flex;flex-direction:column;gap:8px;}
+.flabel{
+  font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--lgrey);
+}
+.finput,.ftextarea{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.07);
+  color:var(--white);
+  padding:16px 20px;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.82rem;
+  outline:none;
+  transition:border-color 0.3s,background 0.3s;
+  resize:none;
+  backdrop-filter:blur(10px);
+}
+.finput:focus,.ftextarea:focus{
+  border-color:var(--gold);
+  background:rgba(201,168,76,0.04);
+}
+.finput::placeholder,.ftextarea::placeholder{color:var(--lgrey);font-size:0.78rem;}
+.ftextarea{height:130px;}
+.fsubmit{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--black);
+  padding:18px;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.7rem;letter-spacing:5px;text-transform:uppercase;
+  border:none;cursor:pointer;
+  font-weight:600;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+  margin-top:8px;
+}
+.fsubmit::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
+  transition:left 0.5s;
+}
+.fsubmit:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(201,168,76,0.25);}
+.fsubmit:hover::before{left:100%;}
+
+/* FOOTER */
+footer{
+  background:var(--deep);
+  border-top:1px solid rgba(201,168,76,0.1);
+  padding:50px 70px;
+}
+.footer-top{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  margin-bottom:40px;
+}
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:600;letter-spacing:4px;
+  color:var(--white);
+}
+.footer-logo span{color:var(--gold);}
+.footer-tagline{
+  font-size:0.75rem;color:var(--lgrey);
+  letter-spacing:2px;margin-top:8px;
+}
+.footer-links-col h4{
+  font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;
+}
+.footer-links-col a{
+  display:block;
+  font-size:0.8rem;color:rgba(248,244,238,0.4);
+  text-decoration:none;margin-bottom:10px;letter-spacing:1px;
+  transition:color 0.3s;
+}
+.footer-links-col a:hover{color:var(--gold);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-copy{font-size:0.72rem;color:var(--lgrey);letter-spacing:1px;}
+.footer-socials{display:flex;gap:16px;}
+.fsoc{
+  width:36px;height:36px;
+  border:1px solid rgba(201,168,76,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.8rem;color:var(--lgrey);
+  text-decoration:none;
+  transition:all 0.3s;cursor:pointer;
+}
+.fsoc:hover{border-color:var(--gold);color:var(--gold);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s,transform 0.8s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.8s,transform 0.8s;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.8s,transform 0.8s;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* HAMBURGER MENU */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1100;padding:4px;
+}
+.hamburger span{width:26px;height:2px;background:var(--white);transition:all 0.3s;display:block;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.mobile-menu{
+  display:none;position:fixed;inset:0;
+  background:rgba(8,8,8,0.97);backdrop-filter:blur(20px);
+  z-index:1050;flex-direction:column;
+  align-items:center;justify-content:center;gap:36px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:300;letter-spacing:4px;
+  color:var(--white);text-decoration:none;transition:color 0.3s;
+}
+.mobile-menu a:hover{color:var(--gold);}
+.mobile-menu .mob-cta{
+  border:1px solid var(--gold);color:var(--gold) !important;
+  padding:14px 40px;font-size:0.75rem !important;
+  font-family:'Montserrat',sans-serif !important;
+  letter-spacing:4px;text-transform:uppercase;margin-top:10px;
+}
+
+/* TABLET 768px - 1024px */
+@media(max-width:1024px){
+  nav{padding:22px 40px;}
+  nav.scrolled{padding:16px 40px;}
+  section{padding:80px 40px;}
+  .hero{padding:0 40px;}
+  .hero-stats{right:40px;gap:28px;}
+  .hstat-num{font-size:2.8rem;}
+  .about-wrap{grid-template-columns:1fr 1fr;gap:50px;}
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-wrap{grid-template-columns:1fr 1fr;gap:40px;}
+  .about-pillars{grid-template-columns:repeat(3,1fr);}
+  footer{padding:50px 40px;}
+}
+
+/* MOBILE below 768px */
+@media(max-width:768px){
+  nav{padding:18px 20px;}
+  nav.scrolled{padding:14px 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+
+  section{padding:60px 20px;}
+  .hero{padding:100px 20px 60px;min-height:100vh;justify-content:flex-start;}
+  .hero-title{font-size:clamp(3rem,13vw,5rem);margin-bottom:24px;}
+  .hero-desc{font-size:0.8rem;margin-bottom:36px;max-width:100%;}
+  .hero-actions{flex-direction:column;gap:14px;align-items:stretch;}
+  .btn-gold,.btn-ghost{padding:14px 32px;font-size:0.68rem;text-align:center;display:block;}
+  .hero-stats{position:static;transform:none;flex-direction:row;flex-wrap:wrap;gap:20px;margin-top:40px;}
+  .hstat{text-align:left;}
+  .hstat-num{font-size:2.2rem;}
+  .hstat-label{font-size:0.55rem;}
+  .hstat-line{margin-left:0;}
+  .hero-scroll{left:20px;bottom:24px;}
+
+  .about-wrap{grid-template-columns:1fr;gap:36px;}
+  .about-img-main{height:280px;}
+  .about-badge2{right:0;bottom:16px;padding:16px 20px;}
+  .badge-num{font-size:2rem;}
+  .about-pillars{grid-template-columns:1fr 1fr !important;}
+  .pillar{padding:20px 16px;}
+  .pillar-name{font-size:0.9rem;}
+  .pillar-desc{font-size:0.7rem;}
+
+  .services-header{flex-direction:column;gap:16px;align-items:flex-start;margin-bottom:36px;}
+  .services-grid{grid-template-columns:1fr;}
+  .svc{padding:32px 24px;}
+
+  .process-line{flex-direction:column;gap:24px;}
+  .process-line::before{top:0;bottom:0;left:28px;right:auto;width:1px;height:auto;}
+  .pstep{text-align:left;padding:0 0 0 60px;}
+  .pstep-dot{margin:0 0 16px 0;}
+
+  .contact-wrap{grid-template-columns:1fr;gap:36px;}
+  .frow{grid-template-columns:1fr;gap:14px;}
+  .contact-bg-text{font-size:8rem;}
+
+  footer{padding:40px 20px;}
+  .footer-top{flex-direction:column;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:16px;text-align:center;}
+  .footer-logo{font-size:1.5rem;}
+
+  .wa-float{bottom:20px;right:16px;}
+  .wa-btn{width:52px;height:52px;}
+  .wa-btn svg{width:26px;height:26px;}
+
+  .s-title{font-size:clamp(2rem,7vw,3rem);}
+  .s-sub{font-size:0.78rem;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">More<span>Build</span>tech</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Get Quote</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#process" onclick="toggleMenu()">Process</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="https://wa.me/918237408633?text=Hello!%20Thank%20you%20for%20reaching%20out%20to%20Morebuildtech.%20We%20specialize%20in%20Premium%20Interiors%20%26%20Construction.%20Please%20share%20your%20requirements%20(Budget%20%2F%20Location%20%2F%20Project%20Type)%20and%20our%20expert%20will%20assist%20you%20shortly!" target="_blank" class="mob-cta">Get Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Premium Interior & Construction</div>
+    <h1 class="hero-title">
+      CRAFTING<br/>
+      <span class="stroke">TIMELESS</span><br/>
+      <span class="gold">SPACES</span>
+    </h1>
+    <p class="hero-desc">Where architectural precision meets luxurious design. Morebuildtech transforms visions into extraordinary realities — one masterpiece at a time.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/918237408633?text=Hello!%20Thank%20you%20for%20reaching%20out%20to%20Morebuildtech.%20We%20specialize%20in%20Premium%20Interiors%20%26%20Construction.%20Please%20share%20your%20requirements%20(Budget%20%2F%20Location%20%2F%20Project%20Type)%20and%20our%20expert%20will%20assist%20you%20shortly!" target="_blank" rel="noopener" class="btn-gold">Explore Our Work</a>
+      <a href="https://wa.me/918237408633?text=Hello!%20Thank%20you%20for%20reaching%20out%20to%20Morebuildtech.%20We%20specialize%20in%20Premium%20Interiors%20%26%20Construction.%20Please%20share%20your%20requirements%20(Budget%20%2F%20Location%20%2F%20Project%20Type)%20and%20our%20expert%20will%20assist%20you%20shortly!" target="_blank" rel="noopener" class="btn-ghost">Free Consultation</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num">50+</div>
+      <div class="hstat-label">Projects</div>
+      <div class="hstat-line"></div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">7+</div>
+      <div class="hstat-label">Years</div>
+      <div class="hstat-line"></div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">98%</div>
+      <div class="hstat-label">Satisfaction</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to Discover
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-left reveal-left">
+      <div class="about-border-accent"></div>
+      <div class="about-border-accent2"></div>
+      <div class="about-img-main"></div>
+      <div class="about-badge2">
+        <div class="badge-num">7+</div>
+        <div class="badge-txt">Years of<br/>Excellence</div>
+      </div>
+    </div>
+    <div class="about-right reveal-right">
+      <div class="s-tag">Our Story</div>
+      <div class="s-title">Where Vision Meets Craftsmanship</div>
+      <p>Morebuildtech was born from a singular belief — that every space holds the potential for magnificence. For over 7 years, we have been transforming that belief into breathtaking reality across India.</p>
+      <p>From intimate residential sanctuaries to grand commercial landmarks, our philosophy remains constant: uncompromising quality, thoughtful design, and absolute client satisfaction.</p>
+      <div class="about-pillars" style="grid-template-columns:repeat(3,1fr);">
+        <div class="pillar">
+          <div class="pillar-icon">⏱️</div>
+          <div class="pillar-name">On-Time Delivery</div>
+          <div class="pillar-desc">We respect your time — every project delivered on the promised date, no delays.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">💰</div>
+          <div class="pillar-name">Budget Friendly</div>
+          <div class="pillar-desc">Premium quality at honest prices — no hidden charges, ever.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔑</div>
+          <div class="pillar-name">End-to-End Service</div>
+          <div class="pillar-desc">From first design sketch to final handover — we handle everything for you.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🧱</div>
+          <div class="pillar-name">Quality Materials</div>
+          <div class="pillar-desc">Only the finest grade materials used — built to last a lifetime.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">👷</div>
+          <div class="pillar-name">Skilled Workers</div>
+          <div class="pillar-desc">Experienced & trained craftsmen who take pride in every detail they build.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">😊</div>
+          <div class="pillar-name">Happy Clients</div>
+          <div class="pillar-desc">50+ satisfied families & businesses — their smiles are our greatest reward.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="s-tag">Expertise</div>
+      <div class="s-title">What We Create</div>
+    </div>
+    <p class="s-sub" style="margin:0;">From concept sketches to final finishes — complete solutions under one roof.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="svc">
+      <div class="svc-num">01</div>
+      <div class="svc-icon">🏠</div>
+      <div class="svc-name">Residential Interiors</div>
+      <div class="svc-desc">Bespoke home design crafted around your lifestyle. Every corner curated with intent, every material selected with care.</div>
+      <div class="svc-arrow">Learn More</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">02</div>
+      <div class="svc-icon">🏢</div>
+      <div class="svc-name">Commercial Construction</div>
+      <div class="svc-desc">Large-scale building projects executed with engineering precision and delivered on schedule, every time.</div>
+      <div class="svc-arrow">Learn More</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">03</div>
+      <div class="svc-icon">🎨</div>
+      <div class="svc-name">Office Design</div>
+      <div class="svc-desc">Workspaces that inspire productivity and project corporate identity. Designed for people, built for performance.</div>
+      <div class="svc-arrow">Learn More</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">04</div>
+      <div class="svc-icon">🔨</div>
+      <div class="svc-name">Renovation & Remodeling</div>
+      <div class="svc-desc">Breathe extraordinary new life into existing spaces with minimal disruption and maximum transformation.</div>
+      <div class="svc-arrow">Learn More</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">05</div>
+      <div class="svc-icon">🏗️</div>
+      <div class="svc-name">Structural Engineering</div>
+      <div class="svc-desc">Expert structural analysis ensuring safety, regulatory compliance, and lasting structural integrity.</div>
+      <div class="svc-arrow">Learn More</div>
+    </div>
+    <div class="svc">
+      <div class="svc-num">06</div>
+      <div class="svc-icon">💡</div>
+      <div class="svc-name">Turnkey Solutions</div>
+      <div class="svc-desc">End-to-end project delivery from first sketch to final handover. One team, zero compromise.</div>
+      <div class="svc-arrow">Learn More</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="reveal" style="text-align:center;">
+    <div class="s-tag" style="justify-content:center;">How We Work</div>
+    <div class="s-title">Our Process</div>
+    <p class="s-sub" style="margin:0 auto;">A seamless journey from your first idea to your dream space.</p>
+  </div>
+  <div class="process-line reveal">
+    <div class="pstep">
+      <div class="pstep-dot">01</div>
+      <div class="pstep-name">Consultation</div>
+      <div class="pstep-desc">Free discovery session to understand your vision, budget, and timeline.</div>
+    </div>
+    <div class="pstep">
+      <div class="pstep-dot">02</div>
+      <div class="pstep-name">Design Concept</div>
+      <div class="pstep-desc">Our designers craft detailed concepts, 3D renders and material proposals.</div>
+    </div>
+    <div class="pstep">
+      <div class="pstep-dot">03</div>
+      <div class="pstep-name">Approval & Planning</div>
+      <div class="pstep-desc">Final designs approved, permits secured, and project timeline set.</div>
+    </div>
+    <div class="pstep">
+      <div class="pstep-dot">04</div>
+      <div class="pstep-name">Construction</div>
+      <div class="pstep-desc">Expert execution by skilled craftsmen with strict quality supervision.</div>
+    </div>
+    <div class="pstep">
+      <div class="pstep-dot">05</div>
+      <div class="pstep-name">Handover</div>
+      <div class="pstep-desc">Final walkthrough, snag resolution, and keys to your dream space.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg-text">BUILD</div>
+  <div class="reveal" style="text-align:center;">
+    <div class="s-tag" style="justify-content:center;">Get In Touch</div>
+    <div class="s-title">Let's Build Together</div>
+    <p class="s-sub" style="margin:0 auto;">Ready to transform your space? Reach out for a complimentary consultation.</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="cinfo reveal-left">
+      <p>Whether it's an intimate home redesign or a large-scale construction venture, we bring the same level of dedication, craftsmanship, and excellence to every project.</p>
+      <div class="cdetails">
+        <div class="citem">
+          <div class="cicon">📍</div>
+          <div>
+            <div class="clabel">Address</div>
+            <div class="cval">Badlapur, Maharashtra — 421503</div>
+          </div>
+        </div>
+        <div class="citem">
+          <div class="cicon">📞</div>
+          <div>
+            <div class="clabel">Phone</div>
+            <div class="cval">+91 8237408633</div>
+          </div>
+        </div>
+        <div class="citem">
+          <div class="cicon">✉️</div>
+          <div>
+            <div class="clabel">Email</div>
+            <div class="cval">info@morebuildtech.com</div>
+          </div>
+        </div>
+        <div class="citem">
+          <div class="cicon">🕐</div>
+          <div>
+            <div class="clabel">Working Hours</div>
+            <div class="cval">Monday – Saturday: 9:00 AM – 7:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal-right">
+      <div class="cform">
+        <div class="frow">
+          <div class="fg">
+            <label class="flabel">Full Name</label>
+            <input type="text" id="from_name" class="finput" placeholder="Your Name"/>
+          </div>
+          <div class="fg">
+            <label class="flabel">Phone</label>
+            <input type="text" id="phone" class="finput" placeholder="+91 XXXXX XXXXX"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="flabel">Email Address</label>
+          <input type="email" id="from_email" class="finput" placeholder="your@email.com"/>
+        </div>
+        <div class="fg">
+          <label class="flabel">Service Required</label>
+          <input type="text" id="service" class="finput" placeholder="Interior Design / Construction / Renovation..."/>
+        </div>
+        <div class="fg">
+          <label class="flabel">Project Details</label>
+          <textarea id="message" class="ftextarea" placeholder="Tell us about your vision..."></textarea>
+        </div>
+        <button class="fsubmit" id="submitBtn" onclick="handleSubmit()">Send Message — Let's Build</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">More<span>Build</span>tech</div>
+      <div class="footer-tagline">Building Excellence · Crafting Legacies</div>
+    </div>
+    <div class="footer-links-col">
+      <h4>Company</h4>
+      <a href="#about">About Us</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+    </div>
+    <div class="footer-links-col">
+      <h4>Services</h4>
+      <a href="#services">Residential Interior</a>
+      <a href="#services">Commercial Construction</a>
+      <a href="#services">Renovation</a>
+      <a href="#services">Turnkey Solutions</a>
+    </div>
+    <div class="footer-links-col">
+      <h4>Contact</h4>
+      <a href="#">Badlapur, Maharashtra</a>
+      <a href="#">+91 8237408633</a>
+      <a href="#">info@morebuildtech.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Morebuildtech. All rights reserved. Crafted with precision.</div>
+    <div class="footer-socials">
+      <div class="fsoc">in</div>
+      <div class="fsoc">ig</div>
+      <div class="fsoc">fb</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// PARTICLES
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor(){this.reset();}
+  reset(){
+    this.x = Math.random()*W;
+    this.y = Math.random()*H;
+    this.size = Math.random()*1.5+0.3;
+    this.speedX = (Math.random()-0.5)*0.3;
+    this.speedY = (Math.random()-0.5)*0.3;
+    this.opacity = Math.random()*0.5+0.1;
+    this.gold = Math.random() > 0.7;
+  }
+  update(){
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset();
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fillStyle = this.gold
+      ? `rgba(201,168,76,${this.opacity})`
+      : `rgba(248,244,238,${this.opacity*0.3})`;
+    ctx.fill();
+  }
+}
+
+for(let i=0;i<120;i++) particles.push(new Particle());
+
+function animParticles(){
+  ctx.clearRect(0,0,W,H);
+  // Draw connections
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx = particles[i].x-particles[j].x;
+      const dy = particles[i].y-particles[j].y;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if(dist<100){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle = `rgba(201,168,76,${0.06*(1-dist/100)})`;
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+      }
+    }
+    particles[i].update();
+    particles[i].draw();
+  }
+  requestAnimationFrame(animParticles);
+}
+animParticles();
+
+// CUSTOM CURSOR
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px';
+  cursor.style.top=my+'px';
+});
+function animCursor(){
+  rx+=(mx-rx)*0.12;
+  ry+=(my-ry)*0.12;
+  cursorRing.style.left=rx+'px';
+  cursorRing.style.top=ry+'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a,button,.svc,.tcard,.gitem,.pillar,.pstep').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursorRing.style.width='60px';
+    cursorRing.style.height='60px';
+    cursorRing.style.borderColor='rgba(201,168,76,0.8)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursorRing.style.width='36px';
+    cursorRing.style.height='36px';
+    cursorRing.style.borderColor='rgba(201,168,76,0.5)';
+  });
+});
+
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',scrollY>60);
+});
+
+// HAMBURGER MENU
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+
+// SCROLL REVEAL
+const revEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*100);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.08});
+revEls.forEach(el=>obs.observe(el));
+
+// FORM - Web3Forms Backend
+async function handleSubmit(){
+  const name    = document.getElementById('from_name').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const email   = document.getElementById('from_email').value.trim();
+  const service = document.getElementById('service').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if(!name || !phone || !email || !message){
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const formData = {
+    access_key: '93a24ff0-9e72-48a6-99d6-f45d5af3c0fa',
+    subject: 'New Enquiry from ' + name + ' - Morebuildtech',
+    replyto: email,
+    from_name: name,
+    phone: phone,
+    from_email: email,
+    service: service,
+    message: message
+  };
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+
+    if(result.success){
+      btn.textContent = '✓ Message Sent Successfully!';
+      btn.style.background = 'linear-gradient(135deg,#2ecc71,#27ae60)';
+      document.getElementById('from_name').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('from_email').value = '';
+      document.getElementById('service').value = '';
+      document.getElementById('message').value = '';
+      setTimeout(()=>{
+        btn.textContent = "Send Message — Let's Build";
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      throw new Error('Failed');
+    }
+  } catch(err) {
+    btn.textContent = "Send Message — Let's Build";
+    btn.disabled = false;
+    alert('Something went wrong. Please call us at +91 8237408633');
+  }
+}
+
+// NUMBER COUNTER ANIMATION
+function animateCount(el, target, suffix=''){
+  let start=0;
+  const dur=2000;
+  const step = timestamp => {
+    if(!start) start=timestamp;
+    const prog = Math.min((timestamp-start)/dur,1);
+    const val = Math.floor(prog*target);
+    el.textContent = val + suffix;
+    if(prog<1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const statsObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const nums = e.target.querySelectorAll('.hstat-num');
+      nums.forEach(n=>{
+        const txt = n.textContent;
+        if(txt.includes('50')) animateCount(n,50,'+');
+        else if(txt.includes('7')) animateCount(n,7,'+');
+        else if(txt.includes('98')) animateCount(n,98,'%');
+      });
+      statsObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.hero-stats').forEach(el=>statsObs.observe(el));
+</script>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<style>
+.wa-float{
+  position:fixed;
+  bottom:32px;right:32px;
+  z-index:9999;
+  display:flex;flex-direction:column;align-items:flex-end;gap:12px;
+}
+.wa-btn{
+  width:60px;height:60px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 30px rgba(37,211,102,0.4);
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform 0.3s,box-shadow 0.3s;
+  position:relative;
+}
+.wa-btn:hover{
+  transform:scale(1.1) translateY(-3px);
+  box-shadow:0 14px 40px rgba(37,211,102,0.55);
+}
+.wa-btn svg{width:30px;height:30px;fill:#fff;}
+/* Pulse ring */
+.wa-btn::before{
+  content:'';
+  position:absolute;inset:-6px;
+  border-radius:50%;
+  border:2px solid rgba(37,211,102,0.4);
+  animation:waPulse 2s ease-out infinite;
+}
+.wa-btn::after{
+  content:'';
+  position:absolute;inset:-12px;
+  border-radius:50%;
+  border:2px solid rgba(37,211,102,0.2);
+  animation:waPulse 2s ease-out 0.4s infinite;
+}
+@keyframes waPulse{
+  0%{transform:scale(1);opacity:1;}
+  100%{transform:scale(1.4);opacity:0;}
+}
+/* Tooltip */
+.wa-tooltip{
+  background:rgba(8,8,8,0.92);
+  border:1px solid rgba(37,211,102,0.3);
+  backdrop-filter:blur(12px);
+  color:#f8f4ee;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.72rem;letter-spacing:1px;
+  padding:10px 16px;
+  white-space:nowrap;
+  opacity:0;transform:translateX(10px);
+  transition:all 0.3s;
+  pointer-events:none;
+}
+.wa-float:hover .wa-tooltip{
+  opacity:1;transform:translateX(0);
+}
+</style>
+
+<div class="wa-float">
+  <div class="wa-tooltip">Chat on WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/918237408633?text=Hello!%20Thank%20you%20for%20reaching%20out%20to%20Morebuildtech.%20We%20specialize%20in%20Premium%20Interiors%20%26%20Construction.%20Please%20share%20your%20requirements%20(Budget%20%2F%20Location%20%2F%20Project%20Type)%20and%20our%20expert%20will%20assist%20you%20shortly!" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</div>
+
+</body>
+</html>
