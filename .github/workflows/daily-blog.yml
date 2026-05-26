@@ -18,7 +18,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install packages
-        run: echo "No packages needed"
+        run: echo"Groq uses built-in urllib, no packages needed"
 
       - name: Generate blog post
         env:
