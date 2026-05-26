@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 MoreBuildtech - Daily SEO Blog Generator
-Powered by Google Gemini API (FREE)
-Roz 10 AM IST pe automatically chalta hai
+Powered by Groq AI (FREE - No Limits!)
+Daily 10 AM IST automatic blog post
 """
 
 import json, os, re, urllib.request, urllib.error
@@ -53,8 +53,8 @@ def get_topic():
     return TOPICS[datetime.now().timetuple().tm_yday % len(TOPICS)]
 
 def ai_generate(t):
-    api_key = os.environ["GEMINI_API_KEY"]
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key={api_key}"
+    api_key = os.environ["GROQ_API_KEY"]
+    url = "https://api.groq.com/openai/v1/chat/completions"
 
     prompt = f"""You are an SEO expert writing for MoreBuildtech, a premium interior & construction company in Mumbai, India.
 
@@ -95,15 +95,26 @@ Return ONLY valid JSON, no markdown fences, no extra text:
 }}"""
 
     payload = json.dumps({
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 4096}
+        "model": "llama-3.3-70b-versatile",
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.7,
+        "max_tokens": 4096
     }).encode("utf-8")
 
-    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"}, method="POST")
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        },
+        method="POST"
+    )
+
     with urllib.request.urlopen(req) as resp:
         data = json.loads(resp.read().decode("utf-8"))
 
-    raw = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+    raw = data["choices"][0]["message"]["content"].strip()
     raw = re.sub(r'^```json\s*', '', raw)
     raw = re.sub(r'^```\s*', '', raw)
     raw = re.sub(r'\s*```$', '', raw)
