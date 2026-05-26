@@ -54,7 +54,7 @@ def get_topic():
 
 def ai_generate(t):
     api_key = os.environ["GEMINI_API_KEY"]
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key={api_key}"
 
     prompt = f"""You are an SEO expert writing for MoreBuildtech, a premium interior & construction company in Mumbai, India.
 
