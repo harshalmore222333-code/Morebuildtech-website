@@ -18,7 +18,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install packages
-        run: pip install google-generativeai
+        run: echo "No packages needed"
 
       - name: Generate blog post
         env:
