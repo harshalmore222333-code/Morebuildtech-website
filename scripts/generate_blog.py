@@ -102,13 +102,15 @@ Return ONLY valid JSON, no markdown fences, no extra text:
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        url,
-        data=payload,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
-        },
-        method="POST"
+    url,
+    data=payload,
+    headers={
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}",
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "application/json"
+    },
+    method="POST"
     )
 
     with urllib.request.urlopen(req) as resp:
