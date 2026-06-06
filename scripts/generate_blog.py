@@ -9,7 +9,7 @@ import json, os, re, urllib.request, urllib.error
 from datetime import datetime
 from pathlib import Path
 
-SITE_URL = "https://symphonious-paletas-11d397.netlify.app"
+SITE_URL = "https://morebuildtech.in"
 BLOG_DIR = Path("blog")
 WA_LINK  = "https://wa.me/918237408633?text=Hello!%20I%20read%20your%20blog%20and%20want%20a%20free%20consultation."
 
