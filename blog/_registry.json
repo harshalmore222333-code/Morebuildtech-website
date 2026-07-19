@@ -270,5 +270,13 @@
     "cat": "Interior Design",
     "date": "Jul 16, 2026",
     "date_iso": "2026-07-16"
+  },
+  {
+    "slug": "vastu-shastra-home-construction",
+    "title": "Vastu Shastra Home Construction Tips",
+    "excerpt": "Vastu Shastra home construction is an ancient Indian practice that aims to create a harmonious living space. By following Vastu Shastra tips, you can ensure a peaceful and prosperous life in your new home.",
+    "cat": "Vastu",
+    "date": "Jul 19, 2026",
+    "date_iso": "2026-07-19"
   }
 ]
